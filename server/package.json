@@ -1,0 +1,19 @@
+{
+  "name": "epdbserver",
+  "version": "1.0.0",
+  "description": "Database and services for employee panda",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "lodash": "^4.0.1",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.3.7",
+    "node-restful": "^0.2.5"
+  }
+}
