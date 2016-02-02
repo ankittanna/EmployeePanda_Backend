@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var _ = require('lodash');
 
+var Admin = mongoose.mongo.Admin;
+
 // Create the instance of the app
 var app = express();
 
@@ -23,8 +25,9 @@ app.use(function(req, res, next){
 });
 
 // Connect here with MongoDB
-mongoose.connect('mongodb://localhost/employeepandadb');
-mongoose.connection.once('open', function(){
+// Our Database is employeepandadb
+var connection = mongoose.createConnection('mongodb://localhost/employeepandadb');
+connection.on('open', function(){
     // Load the models
     app.models = require('./models/index');
     
@@ -33,6 +36,13 @@ mongoose.connection.once('open', function(){
     
     _.each(routes, function(controller, route) {
         app.use(route, controller(app, route));
+    });
+    
+    // Access all the collections using this
+    new Admin(connection.db).listDatabases(function(err, result) {
+            console.log('listDatabases succeeded ----> ' + result.databases);
+            // database list stored in result.databases
+            var allDatabases = result.databases;    
     });
     
     console.log('Listening on port 3000');
