@@ -30,4 +30,4 @@ var VendorSchema = new mongoose.Schema({
 });
 
 // Export the model schema
-module.exports = MenuSchema;
+module.exports = VendorSchema;
