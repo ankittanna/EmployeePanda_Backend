@@ -5,15 +5,18 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var _ = require('lodash');
 
-var Admin = mongoose.mongo.Admin;
-
 // Create the instance of the app
 var app = express();
 
 // Add the necessary middlewares
 // These middlewares get called before each service request
+// app.use(bodyParser.urlencoded({extended:true}));
+// app.use(bodyParser.raw({inflate:true, type:'application/*'}));
+// app.use(bodyParser.json());
+// app.use(methodOverride('X-HTTP-Method-Override'));
+
+// Add the necessary middleware
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.raw({inflate:true, type:'application/*'}));
 app.use(bodyParser.json());
 app.use(methodOverride('X-HTTP-Method-Override'));
 
@@ -22,12 +25,18 @@ app.use(function(req, res, next){
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
+        next();
+});
+
+// Define Routes for your application
+app.use('/hello', function(req, res, next){
+    res.send('Hello World!');
+    next();
 });
 
 // Connect here with MongoDB
-// Our Database is employeepandadb
-var connection = mongoose.createConnection('mongodb://localhost/employeepandadb');
-connection.on('open', function(){
+mongoose.connect('mongodb://localhost/employeepandadb');
+mongoose.connection.once('open', function(){
     // Load the models
     app.models = require('./models/index');
     
@@ -36,13 +45,6 @@ connection.on('open', function(){
     
     _.each(routes, function(controller, route) {
         app.use(route, controller(app, route));
-    });
-    
-    // Access all the collections using this
-    new Admin(connection.db).listDatabases(function(err, result) {
-            console.log('listDatabases succeeded ----> ' + result.databases);
-            // database list stored in result.databases
-            var allDatabases = result.databases;    
     });
     
     console.log('Listening on port 3000');
