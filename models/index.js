@@ -1,7 +1,7 @@
 var modelsIndex = {
-    menu: require('./MenuModel.js'),
-    order: require('./OrderModel.js'),
-    vendor: require('./VendorModel.js')
+    menu: require('./MenuModel'),
+    order: require('./OrderModel'),
+    vendor: require('./VendorModel')
 };
 
 module.exports = modelsIndex;

@@ -3,12 +3,6 @@ var mongoose = require('mongoose');
 
 // Declare the Order Schema for all the vendors
 var OrderSchema = new mongoose.Schema({
-    // username
-    // item array
-    // date time
-    // vendor name
-    // user phone number
-    // order status - can be changed only by vendor
     username:{
         type: String,
         required: true
