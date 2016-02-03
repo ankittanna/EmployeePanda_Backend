@@ -5,7 +5,8 @@ var EmployeeSchema = new mongoose.Schema({
     firstName:{
         type: String,
         required: true
-    },
+    }}
+    /*,
     lastName:{
         type: String,
         required: true
@@ -24,12 +25,12 @@ var EmployeeSchema = new mongoose.Schema({
     },
     password:{
         type: String,
-        required: false
+        required: true
     },
     loginType:{
         type: String,
         required: true
-    } // ADFS, Social, App
-});
+    } */
+);
 
 module.exports = EmployeeSchema;

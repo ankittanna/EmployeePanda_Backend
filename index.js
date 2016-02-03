@@ -17,7 +17,6 @@ var app = express();
 
 // Add the necessary middleware
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.raw({inflate:true, type:'application/*'}));
 app.use(bodyParser.json());
 app.use(methodOverride('X-HTTP-Method-Override'));
 

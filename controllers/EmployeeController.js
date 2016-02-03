@@ -7,7 +7,7 @@ module.exports = function(app, route){
     
     // Register this API on route
     rest.register(app, route);
-    
+   
     // Return the middleware
     return function(req, res, next){
         next();
